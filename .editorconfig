@@ -3,6 +3,10 @@ indent_style = tab
 insert_final_newline = true
 charset = utf-8
 
+[*.yml]
+indent_style = space
+indent_size = 2
+
 ###############################
 # .NET Coding Conventions     #
 ###############################

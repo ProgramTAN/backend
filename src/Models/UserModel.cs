@@ -13,9 +13,17 @@ public class UserModel : IEntity
 
 	[Required]
 	[BsonElement("username")]
-	public string Username { get; init; }
+	public string Username { get; set; }
+
+	[Required]
+	[BsonElement("email")]
+	public string Email { get; set; }
 
 	[Required]
 	[BsonElement("password")]
-	public string Password { get; init; }
+	public string Password { get; set; }
+
+	[Required]
+	[BsonElement("salt")]
+	public string Salt { get; set; }
 }

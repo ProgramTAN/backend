@@ -5,7 +5,7 @@ using MongoDbGenericRepository.Attributes;
 namespace ProgramTan.WebApi.Models;
 
 [CollectionName("users")]
-public class UserModel
+public class UserModel : IEntity
 {
 	[BsonId]
 	[BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]

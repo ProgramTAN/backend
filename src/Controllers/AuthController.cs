@@ -59,6 +59,10 @@ public class AuthController : ControllerBase
 		if (string.IsNullOrWhiteSpace(token))
 			return Unauthorized();
 
-		return Ok(new { token, user });
+		return Ok(new
+		{
+			token,
+			id = user.Id
+		});
 	}
 }

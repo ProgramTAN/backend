@@ -8,9 +8,11 @@ var builder = WebApplication.CreateBuilder();
 
 var jwtConfig = builder.Configuration.GetSection("JwtConfig").Get<JwtConfig>();
 var mongoDbConfig = builder.Configuration.GetSection("MongoDbConfig").Get<MongoDbConfig>();
+var pepper = builder.Configuration["Pepper"];
 
 builder.Services.AddSingleton(mongoDbConfig);
 builder.Services.AddSingleton(jwtConfig);
+builder.Services.AddSingleton(pepper);
 
 builder.Services.AddSingleton<UserService>();
 
@@ -62,6 +64,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 

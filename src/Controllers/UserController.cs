@@ -18,6 +18,11 @@ public class UserController : ControllerBase
 		var user = await userService.GetByIdAsync(id);
 		if (user is null)
 			return NotFound();
-		return Ok(user);
+		return Ok(new
+		{
+			user.Id,
+			user.Username,
+			user.Email,
+		});
 	}
 }

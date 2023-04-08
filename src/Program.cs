@@ -1,10 +1,16 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using ProgramTan.WebApi.Configs;
 using ProgramTan.WebApi.Services;
 
 var builder = WebApplication.CreateBuilder();
 
+var jwtConfig = builder.Configuration.GetSection("JwtConfig").Get<JwtConfig>();
 var mongoDbConfig = builder.Configuration.GetSection("MongoDbConfig").Get<MongoDbConfig>();
+
 builder.Services.AddSingleton(mongoDbConfig);
+builder.Services.AddSingleton(jwtConfig);
 
 builder.Services.AddSingleton<UserService>();
 
@@ -22,6 +28,26 @@ builder.Services.AddCors(option =>
 			.Build();
 	});
 });
+
+builder.Services
+	.AddAuthentication(option =>
+	{
+		option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+		option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+	})
+	.AddJwtBearer(option =>
+	{
+		option.SaveToken = true;
+		option.TokenValidationParameters = new TokenValidationParameters
+		{
+			ValidateIssuerSigningKey = true,
+			IssuerSigningKey = new SymmetricSecurityKey(
+				Encoding.ASCII.GetBytes(jwtConfig.Secret)
+			),
+			ValidateIssuer = false,
+			ValidateAudience = false
+		};
+	});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

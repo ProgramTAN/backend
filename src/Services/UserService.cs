@@ -9,8 +9,6 @@ public partial class UserService : ServiceBase<UserModel>
 {
 	private readonly string pepper;
 
-	public UserService(MongoDbConfig config) : base(config) { }
-
 	public UserService(MongoDbConfig config, string pepper) : base(config) =>
 		this.pepper = pepper;
 

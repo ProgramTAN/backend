@@ -1,13 +1,15 @@
-using ProgramTan.WebApi;
+using ProgramTan.WebApi.Configs;
+using ProgramTan.WebApi.Services;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder();
 
 var mongoDbConfig = builder.Configuration.GetSection("MongoDbConfig").Get<MongoDbConfig>();
 builder.Services.AddSingleton(mongoDbConfig);
 
-builder.Services.AddControllers();
+builder.Services.AddSingleton<UserService>();
 
-#if DEBUG
+builder.Services.AddControllers().AddNewtonsoftJson();
+
 builder.Services.AddCors(option =>
 {
 	option.AddPolicy("EnableCors", policy =>
@@ -20,22 +22,18 @@ builder.Services.AddCors(option =>
 			.Build();
 	});
 });
-#endif
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
 	app.UseSwagger();
 	app.UseSwaggerUI();
+	app.UseCors("EnableCors");
 }
-#if DEBUG
-app.UseCors("EnableCors");
-#endif
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

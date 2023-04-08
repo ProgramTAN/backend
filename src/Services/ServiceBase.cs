@@ -1,6 +1,7 @@
 using System.Collections;
 using MongoDB.Driver;
 using MongoDbGenericRepository.Attributes;
+using ProgramTan.WebApi.Configs;
 using ProgramTan.WebApi.Models;
 
 namespace ProgramTan.WebApi.Services;

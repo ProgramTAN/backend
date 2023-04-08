@@ -1,4 +1,4 @@
-namespace ProgramTan.WebApi;
+namespace ProgramTan.WebApi.Configs;
 
 public class MongoDbConfig
 {

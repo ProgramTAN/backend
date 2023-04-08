@@ -38,7 +38,7 @@ public class AuthController : ControllerBase
 
 		var tokenDescriptor = new SecurityTokenDescriptor
 		{
-			Subject = new ClaimsIdentity(new Claim[]
+			Subject = new ClaimsIdentity(new[]
 			{
 				new Claim(ClaimTypes.Name, user.Id)
 			}),

@@ -50,14 +50,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:5145/api/auth/login",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/auth/login",
 									"host": [
-										"localhost"
+										"{{baseUrl}}"
 									],
-									"port": "5145",
 									"path": [
-										"api",
 										"auth",
 										"login"
 									]
@@ -113,14 +110,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:5145/api/user/:id",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/user/:id",
 									"host": [
-										"localhost"
+										"{{baseUrl}}"
 									],
-									"port": "5145",
 									"path": [
-										"api",
 										"user",
 										":id"
 									],

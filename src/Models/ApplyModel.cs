@@ -4,7 +4,7 @@ using MongoDbGenericRepository.Attributes;
 
 namespace ProgramTan.WebApi.Models;
 
-[CollectionName("users")]
+[CollectionName("applies")]
 public class ApplyModel : IEntity
 {
 	[BsonId]

@@ -4,7 +4,7 @@ using MongoDbGenericRepository.Attributes;
 
 namespace ProgramTan.WebApi.Models;
 
-[CollectionName("users")]
+[CollectionName("competitions")]
 public class CompetitionModel : IEntity
 {
 	[BsonId]

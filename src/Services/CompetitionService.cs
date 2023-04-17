@@ -1,3 +1,4 @@
+using MongoDB.Driver;
 using ProgramTan.WebApi.Configs;
 using ProgramTan.WebApi.Models;
 
@@ -10,6 +11,12 @@ public class CompetitionService : ServiceBase<CompetitionModel>
 	public async Task<CompetitionModel> Create(CompetitionModel competition)
 	{
 		await this.Collection.InsertOneAsync(competition);
+		return competition;
+	}
+
+	public async Task<CompetitionModel> Update(CompetitionModel competition)
+	{
+		await this.Collection.ReplaceOneAsync(x => x.Id == competition.Id, competition);
 		return competition;
 	}
 }

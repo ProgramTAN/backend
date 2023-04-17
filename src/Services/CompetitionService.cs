@@ -19,4 +19,7 @@ public class CompetitionService : ServiceBase<CompetitionModel>
 		await this.Collection.ReplaceOneAsync(x => x.Id == competition.Id, competition);
 		return competition;
 	}
+
+	public async Task Delete(string id) =>
+		await this.Collection.DeleteOneAsync(x => x.Id == id);
 }

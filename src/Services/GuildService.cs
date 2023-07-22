@@ -17,4 +17,10 @@ public class GuildService : ServiceBase<GuildModel>
 		await Collection.InsertOneAsync(guild);
 		return guild;
 	}
+
+	public async Task<GuildModel> UpdateGuildAsync(GuildModel guild)
+	{
+		await Collection.ReplaceOneAsync(g => g.Id == guild.Id, guild);
+		return guild;
+	}
 }

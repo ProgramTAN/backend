@@ -23,4 +23,7 @@ public class GuildService : ServiceBase<GuildModel>
 		await Collection.ReplaceOneAsync(g => g.Id == guild.Id, guild);
 		return guild;
 	}
+
+	public async Task DeleteGuildAsync(string id) =>
+		await Collection.DeleteOneAsync(g => g.Id == id);
 }

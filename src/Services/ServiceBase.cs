@@ -31,13 +31,9 @@ public class ServiceBase<T> where T : IEntity
 	public async Task<T> GetByIdAsync(string id)
 	{
 		T entity = await this.Collection.Find(x => x.Id == id)
-			.FirstOrDefaultAsync();
-
-		if (entity is null)
-			throw new NotFoundException(
+			.FirstOrDefaultAsync() ?? throw new NotFoundException(
 				$"{typeof(T).Name.Replace("model", "")} with id {id} not found"
 			);
-
 		ValidateFields(entity, "Id");
 
 		return entity;
@@ -52,12 +48,10 @@ public class ServiceBase<T> where T : IEntity
 		foreach (var field in fieldsToCheck)
 		{
 			var property = entity.GetType().GetProperty(field);
-			var value = property.GetValue(entity);
-
 			string errorMessage = $"{field} cannot be empty";
 
-			if (value is null)
-				throw new RestrictedException(errorMessage);
+			var value = property.GetValue(entity)
+				?? throw new RestrictedException(errorMessage);
 
 			bool isEmpty = value is IList list && list.Count == 0 ||
 				string.IsNullOrWhiteSpace(value.ToString());
